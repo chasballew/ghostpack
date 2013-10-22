@@ -6,11 +6,11 @@
 
 - name: Create user's .ssh directory
   file: path=/home/{{ ssh_username }}/.ssh/ state=directory
-  		owner={{ ssh_username }} group=admin mode=0700
+        owner={{ ssh_username }} group=admin mode=0700
 
 - name: Copy user's authorized_keys
   copy: src=/tmp/authorized_keys dest=/home/{{ ssh_username }}/.ssh/authorized_keys
-  		owner={{ ssh_username }} group=admin mode=600 backup=yes
+        owner={{ ssh_username }} group=admin mode=600 backup=yes
 
 - name: Add user to sudoers.d with NOPASSWD set
   lineinfile: "dest=/etc/sudoers.d/{{ ssh_username }} state=present create=yes
