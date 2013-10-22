@@ -38,17 +38,6 @@
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E {{ .Path }}"
     },
     {
-      "type": "ansible-local",
-      "playbook_file": "playbook/ghost.yml",
-      "role_paths": [
-        "playbook/roles/base",
-        "playbook/roles/ghost",
-        "playbook/roles/mysql",
-        "playbook/roles/user",
-        "playbook/roles/nginx"
-      ]
-    },
-    {
       "type": "file",
       "source": "files/sshd_config",
       "destination": "/tmp/sshd_config"
@@ -62,6 +51,17 @@
       "type": "file",
       "source": "files/sysctl.conf",
       "destination": "/tmp/sysctl.conf"
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "playbook/ghost.yml",
+      "role_paths": [
+        "playbook/roles/base",
+        "playbook/roles/ghost",
+        "playbook/roles/mysql",
+        "playbook/roles/user",
+        "playbook/roles/nginx"
+      ]
     }
   ]
 }

@@ -4,14 +4,14 @@ Ghostpack!
 
 ![](img/ghostbusters-elevator.jpg)
 ```
-Dr Ray Stantz: You know, it just occurred to me that we really haven't had a successful test of this equipment.
+Dr Ray Stantz: You know, it's just occurred to me we really haven't had a completely successful test of this equipment.
 Dr. Egon Spengler: I blame myself.
 Dr. Peter Venkman: So do I.
-Ray: Well, no sense in worrying about it now.
+Ray: Well, no sense worrying about it now.
 Venkman: Why worry? Each one of us is carrying an unlicensed nuclear accelerator on his back.
 Ray: ...yep. Let's get ready. Switch me on.
 ```
-<a href="http://www.youtube.com/watch?v=WzLobQxY6gg" target="_blank">YouTube</a>
+<a href="http://youtu.be/WzLobQxY6gg?t=15s" target="_blank">YouTube</a>
 
 ## What is this?
 
@@ -41,7 +41,8 @@ Also, Packer lets you hack around in the guts of the image and rebuild it in sec
 The base build is taken largely from <a href="http://0v.org/installing-ghost-on-ubuntu-nginx-and-mysql/" target="_blank">Gregg Housh's ubuntu + nginx +mysql + forever</a> install guide. All credit to him, all errors and ommissions to me.
 
 ## Configuration
-1. Copy the `sample_config.json` file as `config.json` and fill out your own keys/passwords/settings, etc. If you aren't using something (like `add_ssh_user`), just leave it.
+1. Copy the `sample_config.json` file as `config.json` and fill out your own keys/passwords, etc.
+1. Edit `playbook/group_vars/all` to your liking. 
 1. Add a public key file to `files/authorized keys`. (See note below for warning about sudo passwd.)
 1. (optional) Tweak any of the files in `config` to suit your preferences.
 
@@ -63,4 +64,5 @@ The base build is taken largely from <a href="http://0v.org/installing-ghost-on-
 1. I left fail2ban's default settings in place.
 1. Can make this pull from the TryGhost Github repo later. Now just grabs the [0.3.3 release from en.ghost.org](https://en.ghost.org/download/).
 1. If Packer hangs on a file upload, make sure there's a newline at the end.
-1. Included is a Vagrantfile, if you want to use Vagrant to debug locally.
+1. Included is a Vagrantfile, if you want to use Vagrant to debug locally. You'll need to run the shell commands to install Ansible manually, then `vagrant ssh` and `cd /vagrant_playbook`. The command Packer uses to run Ansible is:  
+`ansible-playbook ghost.yml -c local -i "127.0.0.1,"`

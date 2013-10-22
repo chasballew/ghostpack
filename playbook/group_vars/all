@@ -1,20 +1,19 @@
 ---
 # file group_vars/all
 
-# see if we can use Packer templating
-# otherwise, edit manually
-
+# stuff you definitely want to change
 description: "CB's Ghost Blog"
 author: "CB"
-
-ghost_version: "0.3.3"
-
+my_domain: ghostpack.chasballew.com
 ssh_username: "chas"
+# remember to add an authorized_keys file!
 
+# stuff you might want to change
+ghost_version: "0.3.3"
 # the user and password ghost will use to access mysql
 mysql_username: "ghost"
 mysql_password: "supersecurepass4"
+
+# don't change this unless you really need to
 mysql_port: 2368
 
-# used by nginx for server configuration
-my_domain: ghostpack.chasballew.com
