@@ -3,7 +3,7 @@
 
 - name: Download Ghost 
   get_url: url=https://en.ghost.org/zip/ghost-{{ ghost_version }}.zip
-           dest=/var/www/ghost-{{ ghost_version }}.zip
+            dest=/var/www/ghost-{{ ghost_version }}.zip
 
 - name: Extract archive
   command: /usr/bin/unzip ghost-{{ ghost_version }}.zip chdir=/var/www
@@ -16,7 +16,7 @@
 
 - name: Create Ghost MySQL user
   mysql_user: name={{ mysql_username }} password={{ mysql_password }} priv=*.*:ALL
-              host='localhost' state=present
+                host='localhost' state=present
 
 - name: Install npm dependencies in production
   npm: production

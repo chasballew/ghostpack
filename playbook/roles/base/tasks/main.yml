@@ -3,11 +3,11 @@
 
 - name: Copy new sshd_config, backup, set privileges
   copy: src=/tmp/sshd_config dest=/etc/ssh/sshd_config owner=root 
-        group=root mode=644 backup=yes
+          group=root mode=644 backup=yes
 
 - name: Copy hardened sysctl.conf settings
   copy: src=/tmp/sysctl.conf dest=/etc/sysctl.conf owner=root 
-        group=root mode=644 backup=yes
+          group=root mode=644 backup=yes
 
 - name: Limit use of su to admins
   command: /usr/sbin/dpkg-statoverride --update --add root admin 4750 /bin/su

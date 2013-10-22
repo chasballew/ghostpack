@@ -4,17 +4,17 @@
 # see if we can use Packer templating
 # otherwise, edit manually
 
-description: {{ user `description`}}
-author: {{ user `author`}}
+description: "CB's Ghost Blog"
+author: "CB"
 
-ghost_version: {{ user `ghost_version`}}
+ghost_version: "0.3.3"
 
-ssh_username: {{ user `ssh_username`}}
+ssh_username: "chas"
 
 # the user and password ghost will use to access mysql
-mysql_username: {{ user `mysql_username`}}
-mysql_password: {{ user `mysql_password`}}
-mysql_port: {{ user `mysql_port`}}
+mysql_username: "ghost"
+mysql_password: "supersecurepass4"
+mysql_port: 2368
 
 # used by nginx for server configuration
-my_domain: {{ user `my_domain`}}
+my_domain: ghostpack.chasballew.com

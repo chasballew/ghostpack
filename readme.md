@@ -63,3 +63,4 @@ The base build is taken largely from <a href="http://0v.org/installing-ghost-on-
 1. I left fail2ban's default settings in place.
 1. Can make this pull from the TryGhost Github repo later. Now just grabs the [0.3.3 release from en.ghost.org](https://en.ghost.org/download/).
 1. If Packer hangs on a file upload, make sure there's a newline at the end.
+1. Included is a Vagrantfile, if you want to use Vagrant to debug locally.
