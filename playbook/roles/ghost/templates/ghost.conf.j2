@@ -1,7 +1,7 @@
 #/etc/init/ghost.conf
 
-description {{ description }}
-author {{ author }}
+description "{{ description }}""
+author "{{ author }}""
 
 # Start the service after everything loaded
 start on (local-filesystems and net-device-up IFACE=eth0)
