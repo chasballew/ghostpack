@@ -1,15 +1,7 @@
 {
   "variables": {
     "aws_access_key": "",
-    "aws_secret_key": "",
-    "description": "",
-    "author": "",
-    "ghost_version": "",
-    "ssh_user_name": "",
-    "mysql_username": "",
-    "mysql_password": "",
-    "mysql_port": "",
-    "my_domain": ""
+    "aws_secret_key": ""
   },
   "builders": [
     {
@@ -40,17 +32,17 @@
     {
       "type": "file",
       "source": "files/sshd_config",
-      "destination": "/tmp/sshd_config"
+      "destination": "/packer_tmp/sshd_config"
     },
     {
       "type": "file",
       "source": "files/authorized_keys",
-      "destination": "/tmp/authorized_keys"
+      "destination": "/packer_tmp/authorized_keys"
     },
     {
       "type": "file",
       "source": "files/sysctl.conf",
-      "destination": "/tmp/sysctl.conf"
+      "destination": "/packer_tmp/sysctl.conf"
     },
     {
       "type": "ansible-local",

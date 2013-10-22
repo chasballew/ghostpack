@@ -1,6 +1,6 @@
 files/authorized_keys
 files/.ansible*
-config.json
+packer_config.json
 
 packer_cache
 packer-vbox-output

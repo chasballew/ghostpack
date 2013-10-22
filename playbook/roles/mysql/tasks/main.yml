@@ -1,21 +1,25 @@
 ---
 # file roles/mysql/tasks/main.yml
 
-- name: Install Mysql package
-  yum: name={{ item }} state=present
+- name: Install Mysql
+  apt: name=$item state=present update_cache=yes
   with_items:
-   - mysql-server
-   - MySQL-python
-   - libselinux-python
-   - libsemanage-python
-
-- name: Configure SELinux to start mysql on any port
-  seboolean: name=mysql_connect_any state=true persistent=yes
-
-- name: Create Mysql configuration file
-  template: src=my.cnf.j2 dest=/etc/my.cnf
-  notify: 
-  - restart mysql
+  - mysql-client
+  - mysql-server-5.5
+  - python-mysqldb
 
 - name: Start Mysql Service
-  service: name=mysqld state=started enabled=true
+  service: name=mysql state=started enabled=true
+
+- name: Create Ghost dev database
+  mysql_db: name=ghostdev state=present
+
+- name: Create Ghost prod database
+  mysql_db: name=ghost state=present
+
+- name: Create Ghost MySQL user
+  mysql_user: name={{ mysql_username }}
+              password={{ mysql_password }}
+              priv=*.*:ALL
+              host='localhost'
+              state=present

@@ -2,29 +2,25 @@
 # file roles/base/tasks/main.yml
 
 - name: Copy new sshd_config, backup, set privileges
-  copy: src=/tmp/sshd_config dest=/etc/ssh/sshd_config owner=root 
+  copy: src=/packer_tmp/sshd_config dest=/etc/ssh/sshd_config owner=root 
           group=root mode=644 backup=yes
 
 - name: Copy hardened sysctl.conf settings
-  copy: src=/tmp/sysctl.conf dest=/etc/sysctl.conf owner=root 
+  copy: src=/packer_tmp/sysctl.conf dest=/etc/sysctl.conf owner=root 
           group=root mode=644 backup=yes
 
 - name: Limit use of su to admins
   command: /usr/sbin/dpkg-statoverride --update --add root admin 4750 /bin/su
+  ignore_errors: yes
 
 - name: Secure shared memory
   lineinfile: dest=/etc/fstab
+              regexp=''
               line="tmpfs     /dev/shm     tmpfs     defaults,noexec,nosuid     0     0"
               insertafter=EOF
 
-- name: Run the equivalent of apt-get update
-  apt: update_cache=yes
-
 - name: Install software-properties-common
   apt: pkg=software-properties-common state=present
-
-- name: Install the node.js repo
-  apt_repository: repo='ppa:chris-lea/node.js'
 
 - name: Install fail2ban
   apt: pkg=fail2ban state=present

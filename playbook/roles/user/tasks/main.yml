@@ -2,21 +2,32 @@
 #file roles/user/tasks/main.yml
 
 - name: Add SSH user
-  user: name={{ ssh_username }} group=admin home=/home/{{ ssh_username }}/
+  user: name={{ ssh_username }}
+        group=admin
+        home=/home/{{ ssh_username }}/
 
 - name: Create user's .ssh directory
   file: path=/home/{{ ssh_username }}/.ssh/
-        state=directory owner={{ ssh_username }} group=admin mode=0700
+        state=directory
+        owner={{ ssh_username }}
+        group=admin mode=0700
 
 - name: Copy user's authorized_keys
-  copy: src=/tmp/authorized_keys dest=/home/{{ ssh_username }}/.ssh/authorized_keys
-        owner={{ ssh_username }} group=admin mode=600 backup=yes
+  copy: src=/packer_tmp/authorized_keys
+        dest=/home/{{ ssh_username }}/.ssh/authorized_keys
+        owner={{ ssh_username }}
+        group=admin
+        mode=600
+        backup=yes
   notify:
     - restart sshd
 
 - name: Add user to sudoers.d with NOPASSWD set
-  lineinfile: "dest=/etc/sudoers.d/{{ ssh_username }} state=present create=yes
-              line='{{ ssh_user_name }} ALL=NOPASSWD:ALL' insertafter=EOF"
+  lineinfile: "dest=/etc/sudoers.d/{{ ssh_username }}
+              state=present create=yes
+              insertafter=EOF
+              regexp=''
+              line='{{ ssh_username }} ALL=NOPASSWD:ALL'"
 
 - name: Set 0440 permissions on user's sudoers.d file
   file: path=/etc/sudoers.d/{{ ssh_username }} mode=0440

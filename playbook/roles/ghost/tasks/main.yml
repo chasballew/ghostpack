@@ -8,18 +8,14 @@
 - name: Extract archive
   command: /usr/bin/unzip ghost-{{ ghost_version }}.zip chdir=/var/www
 
-- name: Create Ghost dev database
-  mysql_db: name=ghostdev state=present
+- name: Run the equivalent of apt-get update
+  apt: update_cache=yes
 
-- name: Create Ghost prod database
-  mysql_db: name=ghost state=present
-
-- name: Create Ghost MySQL user
-  mysql_user: name={{ mysql_username }} password={{ mysql_password }} priv=*.*:ALL
-                host='localhost' state=present
+- name: Install the node.js repo
+  apt_repository: repo='ppa:chris-lea/node.js'
 
 - name: Install npm dependencies in production
-  npm: production
+  npm: production=yes
 
 - name: Install npm mysql adapter
   npm: name=mysql

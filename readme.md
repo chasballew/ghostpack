@@ -38,17 +38,15 @@ Also, Packer lets you hack around in the guts of the image and rebuild it in sec
 
 # ATTENTION: LET ME REPEAT THAT - MAKE SURE YOU LAUNCH WITH A SECURITY GROUP THAT ALLOWS HTTP ACCESS
 
-The base build is taken largely from <a href="http://0v.org/installing-ghost-on-ubuntu-nginx-and-mysql/" target="_blank">Gregg Housh's ubuntu + nginx +mysql + forever</a> install guide. All credit to him, all errors and ommissions to me.
-
 ## Configuration
-1. Copy the `sample_config.json` file as `config.json` and fill out your own keys/passwords, etc.
+1. Copy the `sample_packer_config.json` file as `packer_config.json` and fill out your own keys/passwords, etc. You can write these variables into your builder, but if you do, be sure not to push to a public repo.
 1. Edit `playbook/group_vars/all` to your liking. 
 1. Add a public key file to `files/authorized keys`. (See note below for warning about sudo passwd.)
-1. (optional) Tweak any of the files in `config` to suit your preferences.
+1. (optional) Tweak any of the config files in `files` and the playbook role template directories to suit your preferences.
 
 ## Build
 1. To build an AMI:  
-`$ packer build -var-file=config/config.json ghostpack.json`  
+`$ packer build -var-file=config/packer_config.json ghostpack.json`  
 
 ## Deploy
 1. Launch an EC2 instance with your new AMI.
