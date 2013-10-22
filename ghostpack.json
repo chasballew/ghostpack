@@ -1,0 +1,66 @@
+{
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": "",
+    "description": "",
+    "author": "",
+    "ghost_version": "",
+    "ssh_user_name": "",
+    "mysql_username": "",
+    "mysql_password": "",
+    "mysql_port": "",
+    "my_domain": ""
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{user `aws_access_key`}}",
+      "secret_key": "{{user `aws_secret_key`}}",
+      "region": "us-east-1",
+      "source_ami": "ami-ad83d7c4",
+      "instance_type": "t1.micro",
+      "ssh_username": "ubuntu",
+      "ami_name": "ghostpacker-{{timestamp}}",
+      "ami_description": "Ghost on Ubuntu 13.04, generated with Packer."
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sleep 3",
+        "apt-get -y update",
+        "apt-get -y upgrade",
+        "add-apt-repository -y ppa:rquillo/ansible",
+        "apt-get -y install ansible"
+      ],
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E {{ .Path }}"
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "playbook/ghost.yml",
+      "role_paths": [
+        "playbook/roles/base",
+        "playbook/roles/ghost",
+        "playbook/roles/mysql",
+        "playbook/roles/user",
+        "playbook/roles/nginx"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "files/sshd_config",
+      "destination": "/tmp/sshd_config"
+    },
+    {
+      "type": "file",
+      "source": "files/authorized_keys",
+      "destination": "/tmp/authorized_keys"
+    },
+    {
+      "type": "file",
+      "source": "files/sysctl.conf",
+      "destination": "/tmp/sysctl.conf"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+---
+# file roles/ghost/tasks.main.yml
+
+- name: Download Ghost 
+  get_url: url=https://en.ghost.org/zip/ghost-{{ ghost_version }}.zip
+  		   dest=/var/www/ghost-{{ ghost_version }}.zip
+
+- name: Extract archive
+  command: /usr/bin/unzip ghost-{{ ghost_version }}.zip chdir=/var/www
+
+- name: Create Ghost dev database
+  mysql_db: name=ghostdev state=present
+
+- name: Create Ghost prod database
+  mysql_db: name=ghost state=present
+
+- name: Create Ghost MySQL user
+  mysql_user: name={{ mysql_username }} password={{ mysql_password }} priv=*.*:ALL
+  			  host='localhost' state=present
+
+- name: Install npm dependencies in production
+  npm: production
+
+- name: Install npm mysql adapter
+  npm: name=mysql
+
+- name: Write Ghost config file
+  template: src=config.js.j2 dest=/var/www/config.js
+
+- name: Write ghost.conf file
+  template: src=ghost.conf.j2 dest=/etc/init/ghost.conf
+
+- name: Start Ghost as a service
+  service: name=ghost state=started enabled=true

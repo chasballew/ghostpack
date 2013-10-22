@@ -1,0 +1,12 @@
+{
+  "aws_access_key": "INSERT_HERE",
+  "aws_secret_key": "INSERT_HERE",
+  "description": "My Own Ghost Blog",
+  "author": "me",
+  "ghost_version": "0.3.3",
+  "ssh_user_name": "casper",
+  "mysql_username": "ghost",
+  "mysql_password": "supersecurepass4",
+  "mysql_port": "2368",
+  "my_domain": "blog.your_domain.com"
+}

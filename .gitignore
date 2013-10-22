@@ -1,0 +1,11 @@
+files/authorized_keys
+config.json
+
+packer_cache
+packer-vbox-output
+
+ec2_amazon-ebs.pem
+crash.log
+
+.DS_Store
+.vagrant

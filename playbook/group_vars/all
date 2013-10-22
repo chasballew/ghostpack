@@ -1,0 +1,20 @@
+---
+# file group_vars/all
+
+# see if we can use Packer templating
+# otherwise, edit manually
+
+description: {{ user `description`}}
+author: {{ user `author`}}
+
+ghost_version: {{ user `ghost_version`}}
+
+ssh_username: {{ user `ssh_username`}}
+
+# the user and password ghost will use to access mysql
+mysql_username: {{ user `mysql_username`}}
+mysql_password: {{ user `mysql_password`}}
+mysql_port: {{ user `mysql_port`}}
+
+# used by nginx for server configuration
+my_domain: {{ user `my_domain`}}
