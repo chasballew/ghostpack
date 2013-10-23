@@ -65,5 +65,5 @@ Also, Packer lets you hack around in the guts of the image and rebuild it in sec
 1. If Packer hangs on a file upload, make sure there's a newline at the end.
 1. Included is a Vagrantfile, if you want to use Vagrant to debug locally. You'll need to run the shell commands to install Ansible manually, then `vagrant ssh` and `cd /vagrant_playbook`. The command Packer uses to run Ansible is:  
 `ansible-playbook ghost.yml -c local -i "127.0.0.1,"`  
-You will also need to edit line 36 in `/etc/nginx/nginx.conf` to `server_name localhost;`  
+You will also need to swap the comment on line 36/37 of the `/nginx.conf` template to `server_name localhost;`  
 1. Once you're installed and signed up, ssh in and uncomment the lines in `/etc/nginx/nginx.conf` to redirect /ghost/signup to the index.

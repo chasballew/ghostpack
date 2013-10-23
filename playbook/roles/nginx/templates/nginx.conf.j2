@@ -26,15 +26,15 @@ http {
     gzip_buffers 16 8k;
 
     upstream ghost_upstream {
-      server 127.0.0.1:{{ mysql_port }};
+      server 127.0.0.1:2368;
       keepalive 64;
     }
 
     server {
     listen 80;
 
-     server_name localhost;
-#    server_name {{ my_domain }} www.{{ my_domain }};
+#     server_name localhost;
+     server_name {{ my_domain }} www.{{ my_domain }};
 
 #    if ($host = 'www.{{ my_domain }}' ) {
 #            rewrite  ^/(.*)$  http://{{ my_domain }}/$1  permanent;
