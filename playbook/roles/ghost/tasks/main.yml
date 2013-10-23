@@ -21,10 +21,10 @@
   command: /usr/bin/unzip -o ghost-{{ ghost_version }}.zip chdir=/var/www
 
 - name: Install Ghost
-  npm: path=/var/www global=yes
+  npm: path=/var/www #global=yes
 
 - name: Write Ghost config file
-  template: src=config.js.j2 dest=/var/www/config.js
+  template: src=sqlite_config.js.j2 dest=/var/www/config.js
 
 - name: Write ghost.conf file
   template: src=ghost.conf.j2 dest=/etc/init/ghost.conf
@@ -39,7 +39,7 @@
         owner=www-data
         group=www-data
         recurse=yes
-        mode=0644
+        mode=0755
 
 - name: Start Ghost as a service
   service: name=ghost state=started enabled=true

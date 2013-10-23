@@ -20,6 +20,6 @@
   roles:
     - base
     - user
-    - mysql 
+  #  - mysql 
     - nginx
     - ghost

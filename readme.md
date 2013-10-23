@@ -64,4 +64,6 @@ Also, Packer lets you hack around in the guts of the image and rebuild it in sec
 1. Can make this pull from the TryGhost Github repo later. Now just grabs the [0.3.3 release from en.ghost.org](https://en.ghost.org/download/).
 1. If Packer hangs on a file upload, make sure there's a newline at the end.
 1. Included is a Vagrantfile, if you want to use Vagrant to debug locally. You'll need to run the shell commands to install Ansible manually, then `vagrant ssh` and `cd /vagrant_playbook`. The command Packer uses to run Ansible is:  
-`ansible-playbook ghost.yml -c local -i "127.0.0.1,"`
+`ansible-playbook ghost.yml -c local -i "127.0.0.1,"`  
+You will also need to edit line 36 in `/etc/nginx/nginx.conf` to `server_name localhost;`  
+1. Once you're installed and signed up, ssh in and uncomment the lines in `/etc/nginx/nginx.conf` to redirect /ghost/signup to the index.
