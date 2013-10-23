@@ -18,10 +18,10 @@
             dest=/var/www/ghost-{{ ghost_version }}.zip
 
 - name: Extract archive
-  command: /usr/bin/unzip -f ghost-{{ ghost_version }}.zip chdir=/var/www
+  command: /usr/bin/unzip -o ghost-{{ ghost_version }}.zip chdir=/var/www
 
 - name: Install Ghost
-  npm: path=/var/www/
+  npm: path=/var/www global=yes
 
 - name: Write Ghost config file
   template: src=config.js.j2 dest=/var/www/config.js
@@ -32,6 +32,14 @@
 - name: Set proper permissions on ghost.conf
   copy: src=/etc/init/ghost.conf dest=/etc/init/ghost.conf 
         owner=root group=root mode=644 backup=yes
+
+- name: Set /var/www permissions
+  file: path=/var/www
+        state=directory
+        owner=www-data
+        group=www-data
+        recurse=yes
+        mode=0644
 
 - name: Start Ghost as a service
   service: name=ghost state=started enabled=true

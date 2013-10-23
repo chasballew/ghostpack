@@ -10,3 +10,5 @@ crash.log
 
 .DS_Store
 .vagrant
+
+aws_commands

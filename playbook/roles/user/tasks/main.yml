@@ -20,7 +20,7 @@
         mode=600
         backup=yes
   notify:
-    - restart sshd
+    - restart ssh
 
 - name: Add user to sudoers.d with NOPASSWD set
   lineinfile: "dest=/etc/sudoers.d/{{ ssh_username }}

@@ -8,6 +8,11 @@
   - mysql-server-5.5
   - python-mysqldb
 
+- name: Copy MySQL configuration
+  template: src=my.cnf.j2 dest=/etc/mysql/my.cnf
+  notify:
+    - restart mysql
+
 - name: Start Mysql Service
   service: name=mysql state=started enabled=true
 

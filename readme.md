@@ -40,13 +40,14 @@ Also, Packer lets you hack around in the guts of the image and rebuild it in sec
 
 ## Configuration
 1. Copy the `sample_packer_config.json` file as `packer_config.json` and fill out your own keys/passwords, etc. You can write these variables into your builder, but if you do, be sure not to push to a public repo.
-1. Edit `playbook/group_vars/all` to your liking. 
+1. Edit the variables in `playbook/ghost.yml` to your liking. When Packer supports it, we will use `playbook/group_vars/all` to set these. 
 1. Add a public key file to `files/authorized keys`. (See note below for warning about sudo passwd.)
 1. (optional) Tweak any of the config files in `files` and the playbook role template directories to suit your preferences.
+1. (optional) Pick a [base AMI in your region](http://cloud-images.ubuntu.com/locator/ec2/)
 
 ## Build
 1. To build an AMI:  
-`$ packer build -var-file=config/packer_config.json ghostpack.json`  
+`$ packer build -var-file=packer_config.json ghostpack.json`  
 
 ## Deploy
 1. Launch an EC2 instance with your new AMI.

@@ -33,14 +33,14 @@ http {
     server {
     listen 80;
 
-    server_name {{ my_domain}} www.{{ my_domain}};
+    server_name {{ my_domain }} www.{{ my_domain }};
 
-    if ($host = 'www.{{ my_domain}}' ) {
-            rewrite  ^/(.*)$  http://{{ my_domain}}/$1  permanent;
+    if ($host = 'www.{{ my_domain }}' ) {
+            rewrite  ^/(.*)$  http://{{ my_domain }}/$1  permanent;
     }
 
 #        location ~ ^/(ghost/signup/) {
-#                rewrite ^/(.*)$ http://{{ my_domain}}/ permanent;
+#                rewrite ^/(.*)$ http://{{ my_domain }}/ permanent;
 #        }
 
     location ~ ^/(img/|css/|lib/|vendor/|fonts/|robots.txt|humans.txt) {

@@ -2,4 +2,4 @@
 # file roles/mysql/handlers/main.yml
 
 - name: restart mysql
-  service: name=mysql state=restarted
+  service: name=mysql state=restarted sleep=5

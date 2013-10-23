@@ -1,19 +1,22 @@
 ---
 # file group_vars/all
+# need to include these in the base playbook for now
+# Packer does not load the global_var folder into the environment
 
 # stuff you definitely want to change
-description: "CB's Ghost Blog"
-author: "CB"
-my_domain: ghostpack.chasballew.com
-ssh_username: "chas"
+# description: "CB's Ghost Blog"
+# author: "CB"
+# my_domain: ghostpack.chasballew.com
+# ssh_username: "chas"
 # remember to add an authorized_keys file!
 
 # stuff you might want to change
-ghost_version: "0.3.3"
+# ghost_version: "0.3.3"
 # the user and password ghost will use to access mysql
-mysql_username: "ghost"
-mysql_password: "supersecurepass4"
+# mysql_username: "ghost"
+# mysql_password: "supersecurepass4"
 
 # don't change this unless you really need to
-mysql_port: 2368
+# mysql_port: 2368
+unused_var: preserve
 

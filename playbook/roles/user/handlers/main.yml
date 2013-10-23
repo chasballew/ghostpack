@@ -1,5 +1,5 @@
 ---
 # file roles/user/handlers/main.yml
 
-- name: restart sshd
-  service: name=sshd state=restarted
+- name: restart ssh
+  service: name=ssh state=restarted

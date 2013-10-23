@@ -9,25 +9,28 @@
       "access_key": "{{user `aws_access_key`}}",
       "secret_key": "{{user `aws_secret_key`}}",
       "region": "us-east-1",
-      "source_ami": "ami-ad83d7c4",
+      "source_ami": "ami-a73264ce",
       "instance_type": "t1.micro",
       "ssh_username": "ubuntu",
-      "ami_name": "ghostpacker-{{timestamp}}",
-      "ami_description": "Ghost on Ubuntu 13.04, generated with Packer."
+      "ami_name": "ghostpack-{{timestamp}}",
+      "ami_description": "Ghost on Ubuntu 12.04, generated with Packer."
     }
   ],
   "provisioners": [
     {
       "type": "shell",
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E {{ .Path }}",
       "inline": [
         "sleep 3",
+        "mkdir /packer_tmp",
+        "chown root:root /packer_tmp",
+        "chmod 777 /packer_tmp",
         "apt-get -y update",
         "apt-get -y upgrade",
         "add-apt-repository -y ppa:rquillo/ansible",
         "apt-get -y update",
         "apt-get -y install ansible"
-      ],
-      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E {{ .Path }}"
+      ]
     },
     {
       "type": "file",
