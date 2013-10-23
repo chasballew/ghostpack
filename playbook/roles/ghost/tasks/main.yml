@@ -24,7 +24,7 @@
   npm: path=/var/www #global=yes
 
 - name: Write Ghost config file
-  template: src=sqlite_config.js.j2 dest=/var/www/config.js
+  template: src={{ db_flavor }}_config.js.j2 dest=/var/www/config.js
 
 - name: Write ghost.conf file
   template: src=ghost.conf.j2 dest=/etc/init/ghost.conf

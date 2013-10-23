@@ -1,6 +1,6 @@
 ---
 #file ghost.yml
-- name: Install Ghost, SQLite, and Nginx
+- name: Install Ghost, MySQL, and Nginx
   hosts: 127.0.0.1
   connection: local
   sudo: yes
@@ -10,9 +10,20 @@
     my_domain: ghostpack.chasballew.com
     ssh_username: "chas"
     # remember to add an authorized_keys file!
+    # stuff you might want to change
     ghost_version: "0.3.3"
+
+    # Change this to flip between SQLite and MySQL
+    # See roles/ghost/tasks/main.yml - "Write Ghost config file"
+    # To flip back to SQLite, also comment out mysql role below
+    db_flavor: mysql
+    # the user and password ghost will use to access mysql
+    mysql_username: "ghost"
+    mysql_password: "supersecurepass4"
+    mysql_port: 3306
   roles:
     - base
     - user
+    - mysql 
     - nginx
     - ghost
